@@ -1,42 +1,29 @@
 import random
 
-def number_guessing_game():
-    
-    number_to_guess = random.randint(1, 100)
-    attempts = 0
+print("Hi! Welcome to the Number Guessing Game.\nYou have 7 chances to guess the number. Let's start!")
 
-    print("Welcome to the Number Guessing Game!")
-    print("I'm thinking of a number between 1 and 100.")
+low = int(input("Enter the Lower Bound: "))
+high = int(input("Enter the Upper Bound: "))
 
-    while True:
-        
-        try:
-            user_guess = int(input("Take a guess: "))
-        except ValueError:
-            print("That's not a valid number!")
-            continue
+print(f"\nYou have 7 chances to guess the number between {low} and {high}. Let's start!")
 
-        
-        if user_guess < 1 or user_guess > 100:
-            print("Please guess a number between 1 and 100.")
-            continue
+num = random.randint(low, high) 
+ch = 7                        # Total allowed chances
+gc = 0                        # Guess counter
 
-        attempts += 1
+while gc < ch:
+    gc += 1
+    guess = int(input('Enter your guess: '))
 
-        
-        if user_guess == number_to_guess:
-            print(f"Congratulations! You found the number in {attempts} attempts.")
-            break
-        elif user_guess < number_to_guess:
-            print("Too low! Try again.")
-        else:
-            print("Too high! Try again.")
+    if guess == num:
+        print(f'Correct! The number is {num}. You guessed it in {gc} attempts.')
+        break
 
-if __name__== "__main__":
-    number_guessing_game()
+    elif gc >= ch and guess != num:
+        print(f'orry! The number was {num}. Better luck next time.')
 
+    elif guess > num:
+        print('Too high! Try a lower number.')
 
-
-        
-
-         
+    elif guess < num:
+        print('Too low! Try a higher number.')
